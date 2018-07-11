@@ -17,25 +17,28 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.cgaima.cheystagram.model.Post;
-import com.parse.FindCallback;
 import com.parse.ParseException;
+import com.parse.ParseFile;
+import com.parse.ParseUser;
+import com.parse.SaveCallback;
 
 import java.io.File;
-import java.util.List;
 
 public class HomeActivity extends AppCompatActivity {
 
-    private static final String imagePath = null;
+    //private static final String imagePath = null;
+
+
+
     private EditText descriptionInput;
     private Button create;
-    private Button refresh;
-    //private ImageView picView;
+
 
     public final String APP_TAG = "Cheystagram";
     public final static int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 1034;
     public String photoFileName = "photo.jpg";
-    File photoFile;
 
+    File photoFile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,40 +47,28 @@ public class HomeActivity extends AppCompatActivity {
 
         descriptionInput = findViewById(R.id.etDescripton);
         create = findViewById(R.id.btnCreate);
-        refresh = findViewById(R.id.btnRefresh);
-        //picView = findViewById(R.id.ivPic);
-
-
+        dispatchTakePictureIntent();
 
 
 
         create.setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View view) {
-                /* final String description = descriptionInput.getText().toString();
+                final String description = descriptionInput.getText().toString();
                  final ParseUser user = ParseUser.getCurrentUser();
-                 final File file = new File(imagePath);
+                 final File file = getPhotoFileUri(photoFileName);
                  final ParseFile parseFile = new ParseFile(file);
 
-                 //createPost(description, parseFile, user);*/
-                 dispatchTakePictureIntent();
+
+                     createPost(description, parseFile, user);
 
 
              }
          });
 
-        refresh.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                loadTopPosts();
-            }
+        }
 
-        });
-
-
-    }
-
-   /* private void createPost(String description, ParseFile imageFile, ParseUser user) {
+    private void createPost(String description, ParseFile imageFile, ParseUser user) {
         final Post newPost = new Post();
         newPost.setDescription(description);
         newPost.setImage(imageFile);
@@ -95,29 +86,8 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-    }*/
-
-    private void loadTopPosts() {
-        final Post.Query postQuery = new Post.Query();
-        postQuery.getTop().withUser();
-
-        postQuery.findInBackground(new FindCallback<Post>() {
-            @Override
-            public void done(List<Post> objects, ParseException e) {
-                if (e == null) {
-                    for (int i = 0; i < objects.size(); i++) {
-                        Log.d("HomeActivity", "Post: " + i + " = "
-                                + objects.get(i).getDescription()
-                                + "\nusername = " + objects.get(i).getUser().getUsername());
-                    }
-                }
-                else {
-                    e.printStackTrace();
-                }
-
-            }
-        });
     }
+
 
     public void dispatchTakePictureIntent() {
         // create Intent to take a picture and return control to the calling application
@@ -175,3 +145,4 @@ public class HomeActivity extends AppCompatActivity {
     }
 
 }
+

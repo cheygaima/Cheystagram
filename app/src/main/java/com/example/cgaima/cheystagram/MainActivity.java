@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
                     //user was logged in correctly
                     Log.d("LoginActivity", "You're in!");
 
-                    final Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+                    final Intent intent = new Intent(MainActivity.this, FeedActivity.class);
                     startActivity(intent);
                     finish();
                 } else {

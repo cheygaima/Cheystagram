@@ -10,9 +10,9 @@
         android:id="@+id/etDescripton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="170dp"
+        android:layout_marginBottom="145dp"
         android:ems="10"
         android:hint="enter a description "
         android:inputType="text"
@@ -25,35 +25,16 @@
         android:layout_height="56dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="178dp"
+        android:layout_marginBottom="54dp"
         android:text="Create" />
-
-    <Button
-        android:id="@+id/btnRefresh"
-        android:layout_width="300dp"
-        android:layout_height="56dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="86dp"
-        android:text="Refresh" />
-
-    <Button
-        android:id="@+id/takepic"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/btnCreate"
-        android:layout_marginTop="108dp"
-        android:text="take pic" />
 
     <ImageView
         android:id="@+id/ivPic"
-        android:layout_width="77dp"
-        android:layout_height="77dp"
-        android:layout_alignParentEnd="true"
+        android:layout_width="168dp"
+        android:layout_height="169dp"
         android:layout_alignParentTop="true"
-        android:layout_marginEnd="55dp"
-        android:layout_marginTop="54dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="144dp"
         app:srcCompat="@android:color/black" />
 
 </RelativeLayout>
