@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.parse.LogInCallback;
 import com.parse.ParseException;
@@ -17,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText userInput;
     private EditText passInput;
     private Button loginBtn;
+    private TextView createAccountTv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
         userInput = findViewById(R.id.username);
         passInput = findViewById(R.id.password);
         loginBtn = findViewById(R.id.login);
+        createAccountTv = findViewById(R.id.createAccount);
 
         loginBtn.setOnClickListener(new View.OnClickListener() {
 
@@ -40,12 +43,22 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+        createAccountTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent signup = new Intent(MainActivity.this, SignUpActivity.class);
+                startActivity(signup);
+            }
+        });
+        
+
+
 
     }
 
     private void logIn(String username, String password) {
-        System.out.println("Username" + username);
-        System.out.println("Password" + password);
+        System.out.println("Username: " + username);
+        System.out.println("Password: " + password);
 
 
         ParseUser.logInInBackground(username, password, new LogInCallback() {
@@ -58,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
 
                     final Intent intent = new Intent(MainActivity.this, FeedActivity.class);
                     startActivity(intent);
-                    finish();
+                    //finish();
                 } else {
                     Log.e("LoginActivity", "Failed :(");
                     e.printStackTrace();

@@ -62,6 +62,10 @@ public class HomeActivity extends AppCompatActivity {
 
                      createPost(description, parseFile, user);
 
+                     Intent postIntent = new Intent(getApplicationContext(), FeedActivity.class);
+                     startActivity(postIntent);
+
+                     //maybe parcel
 
              }
          });
@@ -85,6 +89,8 @@ public class HomeActivity extends AppCompatActivity {
                 }
             }
         });
+
+
 
     }
 

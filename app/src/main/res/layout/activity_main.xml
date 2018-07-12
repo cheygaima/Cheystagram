@@ -4,53 +4,71 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/pinkpurplegradient"
     tools:context=".MainActivity">
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/userLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
+        android:layout_width="333dp"
+        android:layout_height="51dp"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="21dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="78dp"
         tools:layout_editor_absoluteX="8dp"
         tools:layout_editor_absoluteY="16dp">
 
         <android.support.design.widget.TextInputEditText
             android:id="@+id/username"
+            style="@android:style/TextAppearance.Widget.PopupMenu.Small"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="30dp"
+            android:background="@android:color/white"
             android:hint="username" />
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/passLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
+        android:layout_width="333dp"
+        android:layout_height="51dp"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="96dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="133dp"
         tools:layout_editor_absoluteX="8dp"
         tools:layout_editor_absoluteY="85dp">
 
         <android.support.design.widget.TextInputEditText
             android:id="@+id/password"
+            style="@android:style/TextAppearance.Widget.PopupMenu.Small"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="password" />
+            android:layout_height="30dp"
+            android:background="@android:color/white"
+            android:hint="password"
+            android:inputType="textPassword" />
     </android.support.design.widget.TextInputLayout>
 
     <Button
         android:id="@+id/login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="333dp"
+        android:layout_height="51dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="176dp"
+        android:layout_marginTop="195dp"
         android:background="@android:color/holo_purple"
         android:text="log in"
         android:textColor="@android:color/white"
         tools:layout_editor_absoluteX="135dp"
         tools:layout_editor_absoluteY="163dp" />
+
+    <TextView
+        android:id="@+id/createAccount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="53dp"
+        android:clickable="true"
+        android:text="New to Cheystagram? Create an account."
+        android:textColor="@android:color/white"
+        android:textStyle="bold|italic" />
 
 </RelativeLayout>

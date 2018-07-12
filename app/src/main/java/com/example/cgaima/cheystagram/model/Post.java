@@ -6,6 +6,7 @@ import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
+
 @ParseClassName("Post")
 public class Post extends ParseObject {
 
@@ -52,7 +53,6 @@ public class Post extends ParseObject {
             return this;
         }
     }
-
 
     public ParseFile getMedia() {
         return getParseFile("media");
