@@ -2,18 +2,19 @@ package com.example.cgaima.cheystagram;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 
 import com.example.cgaima.cheystagram.model.Post;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseImageView;
+import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
 import java.util.ArrayList;
@@ -21,14 +22,13 @@ import java.util.List;
 
 public class FeedActivity extends AppCompatActivity {
 
-    Button refresh;
     RecyclerView rvFeed;
     ParseUser currentUser = ParseUser.getCurrentUser();
     ParseImageView parsePic;
-
     ArrayList<Post> posts;
     PostAdapter postAdapter;
-
+    SwipeRefreshLayout swipeContainer;
+    ParseQuery<Post> query;
 
 
     @Override
@@ -39,11 +39,13 @@ public class FeedActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        refresh = findViewById(R.id.btnRefresh);
         rvFeed = findViewById(R.id.rvFeed);
         parsePic = findViewById(R.id.parsePic);
         posts = new ArrayList<>();
         postAdapter = new PostAdapter(posts);
+        swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipeContainer);
+        query = ParseQuery.getQuery(Post.class);
+
 
         rvFeed.setLayoutManager(new LinearLayoutManager(this));
 
@@ -52,14 +54,18 @@ public class FeedActivity extends AppCompatActivity {
 
         loadTopPosts();
 
-        refresh.setOnClickListener(new View.OnClickListener() {
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
-            public void onClick(View view) {
+            public void onRefresh() {
+                postAdapter.clear();
                 loadTopPosts();
+                swipeContainer.setRefreshing(false);
             }
-
         });
+
+
     }
+
 
 
 

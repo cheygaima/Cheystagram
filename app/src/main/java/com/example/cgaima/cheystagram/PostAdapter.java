@@ -1,6 +1,7 @@
 package com.example.cgaima.cheystagram;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,6 +12,8 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.cgaima.cheystagram.model.Post;
 import com.parse.ParseImageView;
+
+import org.parceler.Parcels;
 
 import java.util.List;
 
@@ -67,13 +70,37 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         public TextView caption;
         public ParseImageView parsePic;
 
-        public ViewHolder(@NonNull View itemView) {
+        public ViewHolder(@NonNull final View itemView) {
             super(itemView);
 
             //lookup views
             username = (TextView) itemView.findViewById(R.id.username);
             caption = (TextView) itemView.findViewById(R.id.caption);
             parsePic = (ParseImageView) itemView.findViewById(R.id.parsePic);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    Post post = mPosts.get(getAdapterPosition());
+                    Intent detailsIntent = new Intent(context, DetailsActivity.class);
+                    detailsIntent.putExtra("post", Parcels.wrap(post));
+                    context.startActivity(detailsIntent);
+                }
+            });
+
+
         }
     }
+
+    public void clear() {
+        mPosts.clear();
+        notifyDataSetChanged();
+    }
+
+    public void addAll(List<Post> list) {
+        mPosts.addAll(list);
+        notifyDataSetChanged();
+    }
+
 }
