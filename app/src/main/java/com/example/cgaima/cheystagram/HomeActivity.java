@@ -23,19 +23,22 @@ import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
 import java.io.File;
+import java.io.IOException;
 
 public class HomeActivity extends AppCompatActivity {
 
     //private static final String imagePath = null;
 
 
-
     private EditText descriptionInput;
     private Button create;
+    private Button upload;
 
 
     public final String APP_TAG = "Cheystagram";
     public final static int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 1034;
+    public final static int PICK_PHOTO_CODE = 1046;
+
     public String photoFileName = "photo.jpg";
 
     File photoFile;
@@ -47,30 +50,38 @@ public class HomeActivity extends AppCompatActivity {
 
         descriptionInput = findViewById(R.id.etDescripton);
         create = findViewById(R.id.btnCreate);
+        upload = findViewById(R.id.upload);
         dispatchTakePictureIntent();
 
 
-
         create.setOnClickListener(new View.OnClickListener() {
-             @Override
-             public void onClick(View view) {
+            @Override
+            public void onClick(View view) {
                 final String description = descriptionInput.getText().toString();
-                 final ParseUser user = ParseUser.getCurrentUser();
-                 final File file = getPhotoFileUri(photoFileName);
-                 final ParseFile parseFile = new ParseFile(file);
+                final ParseUser user = ParseUser.getCurrentUser();
+                final File file = getPhotoFileUri(photoFileName);
+                final ParseFile parseFile = new ParseFile(file);
 
 
-                     createPost(description, parseFile, user);
+                createPost(description, parseFile, user);
 
-                     Intent postIntent = new Intent(getApplicationContext(), FeedActivity.class);
-                     startActivity(postIntent);
+                Intent postIntent = new Intent(getApplicationContext(), FeedActivity.class);
+                startActivity(postIntent);
 
-                     //maybe parcel
+                //maybe parcel
 
-             }
-         });
+            }
+        });
 
-        }
+        upload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                onPickPhoto();
+            }
+        });
+
+    }
 
     private void createPost(String description, ParseFile imageFile, ParseUser user) {
         final Post newPost = new Post();
@@ -83,13 +94,11 @@ public class HomeActivity extends AppCompatActivity {
             public void done(ParseException e) {
                 if (e == null) {
                     Log.d("HomeActivity", "You just made a post!");
-                }
-                else {
+                } else {
                     e.printStackTrace();
                 }
             }
         });
-
 
 
     }
@@ -122,7 +131,7 @@ public class HomeActivity extends AppCompatActivity {
         File mediaStorageDir = new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES), APP_TAG);
 
         // Create the storage directory if it does not exist
-        if (!mediaStorageDir.exists() && !mediaStorageDir.mkdirs()){
+        if (!mediaStorageDir.exists() && !mediaStorageDir.mkdirs()) {
             Log.d(APP_TAG, "failed to create directory");
         }
 
@@ -130,6 +139,20 @@ public class HomeActivity extends AppCompatActivity {
         File file = new File(mediaStorageDir.getPath() + File.separator + fileName);
 
         return file;
+    }
+
+    // Trigger gallery selection for a photo
+    public void onPickPhoto() {
+        // Create intent for picking a photo from the gallery
+        Intent intent = new Intent(Intent.ACTION_PICK,
+                MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+
+        // If you call startActivityForResult() using an intent that no app can handle, your app will crash.
+        // So as long as the result is not null, it's safe to use the intent.
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            // Bring up gallery to select a photo
+            startActivityForResult(intent, PICK_PHOTO_CODE);
+        }
     }
 
     @Override
@@ -143,12 +166,33 @@ public class HomeActivity extends AppCompatActivity {
                 ImageView ivPreview = (ImageView) findViewById(R.id.ivPic);
                 ivPreview.setImageBitmap(takenImage);
                 Log.d("HomeActivity", "no pic");
-
-            } else { // Result was a failure
-                Toast.makeText(this, "Picture wasn't taken!", Toast.LENGTH_SHORT).show();
             }
+        } else if (requestCode == PICK_PHOTO_CODE) {
+            if (resultCode == RESULT_OK) {
+                //launch the gallery
+                if (data != null) {
+                    Uri photoUri = data.getData();
+                    // Do something with the photo based on Uri
+                    Bitmap selectedImage = null;
+                    try {
+                        selectedImage = MediaStore.Images.Media.getBitmap(this.getContentResolver(), photoUri);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    // Load the selected image into a preview
+                    ImageView ivPreview = (ImageView) findViewById(R.id.ivPic);
+                    ivPreview.setImageBitmap(selectedImage);
+
+                }
+            }
+
+        }
+        else {
+            Toast.makeText(this, "Error taking or uploading a picture. Please try again.", Toast.LENGTH_SHORT).show();
+
         }
     }
+
 
 }
 

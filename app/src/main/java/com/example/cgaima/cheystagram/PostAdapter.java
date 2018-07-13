@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -18,10 +19,11 @@ import org.parceler.Parcels;
 import java.util.List;
 
 
-public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
+public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>  {
 
     private List<Post> mPosts;
     Context context;
+
 
 
     public PostAdapter(List<Post> posts)
@@ -51,6 +53,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         viewHolder.username.setText(post.getUser().getUsername());
         viewHolder.caption.setText(post.getDescription());
         viewHolder.timestamp.setText(post.getCreatedAt().toString());
+        viewHolder.timestamp.setText(post.getRelativeTimeAgo());
 
         Glide.with(context).load(post.getImage().getUrl()).into(viewHolder.parsePic);
 
@@ -69,6 +72,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         public TextView caption;
         public ParseImageView parsePic;
         public TextView timestamp;
+        public ImageButton details;
 
         public ViewHolder(@NonNull final View itemView) {
             super(itemView);
@@ -78,8 +82,9 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             caption = (TextView) itemView.findViewById(R.id.caption);
             parsePic = (ParseImageView) itemView.findViewById(R.id.parsePic);
             timestamp = (TextView) itemView.findViewById(R.id.timestamp);
+            details = (ImageButton) itemView.findViewById(R.id.details);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
+            details.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
 
@@ -98,6 +103,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         mPosts.clear();
         notifyDataSetChanged();
     }
+
 
 }
 

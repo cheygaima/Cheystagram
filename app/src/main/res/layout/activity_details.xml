@@ -50,4 +50,14 @@
         android:textAllCaps="false"
         android:textStyle="bold" />
 
+    <TextView
+        android:id="@+id/timestamp"
+        android:layout_width="126dp"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/username"
+        android:layout_below="@+id/profile"
+        android:text="timestamp here" />
+
+
+
 </RelativeLayout>

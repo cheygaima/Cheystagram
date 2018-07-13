@@ -31,9 +31,10 @@
     <com.parse.ParseImageView
         android:id="@+id/parsePic"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
+        android:layout_height="299dp"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
-        android:layout_centerVertical="true"
+        android:layout_marginBottom="64dp"
         android:clickable="true" />
 
     <TextView
@@ -41,8 +42,7 @@
         android:layout_width="match_parent"
         android:layout_height="54dp"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="13dp"
+        android:layout_alignParentStart="true"
         android:lineSpacingExtra="15sp"
         android:text="caption here"
         android:textAllCaps="false"
@@ -52,12 +52,21 @@
         android:id="@+id/timestamp"
         android:layout_width="113dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_below="@+id/profile"
-        android:layout_marginEnd="17dp"
-        android:layout_marginTop="0dp"
+        android:layout_alignBottom="@+id/profile"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="80dp"
         android:gravity="center"
         android:text="timestamp here" />
+
+    <ImageButton
+        android:id="@+id/details"
+        android:layout_width="31dp"
+        android:layout_height="46dp"
+        android:layout_alignBottom="@+id/profile"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="21dp"
+        android:background="@android:color/transparent"
+        app:srcCompat="@drawable/ufi_more" />
 
 
 </RelativeLayout>

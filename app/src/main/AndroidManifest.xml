@@ -3,6 +3,9 @@
     package="com.example.cgaima.cheystagram">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
 
     <uses-feature
         android:name="android.hardware.camera"
@@ -36,7 +39,7 @@
         <activity android:name=".HomeActivity" />
         <activity android:name=".FeedActivity" />
         <activity android:name=".SignUpActivity" />
-        <activity android:name=".DetailsActivity"></activity>
+        <activity android:name=".DetailsActivity" />
     </application>
 
 </manifest>
