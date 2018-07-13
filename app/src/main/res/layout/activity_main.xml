@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/pinkpurplegradient"
+    android:background="@android:color/background_light"
     tools:context=".MainActivity">
 
     <android.support.design.widget.TextInputLayout
@@ -13,7 +13,7 @@
         android:layout_height="51dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="78dp"
+        android:layout_marginTop="221dp"
         tools:layout_editor_absoluteX="8dp"
         tools:layout_editor_absoluteY="16dp">
 
@@ -30,9 +30,10 @@
         android:id="@+id/passLayout"
         android:layout_width="333dp"
         android:layout_height="51dp"
-        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="133dp"
+        android:layout_marginBottom="233dp"
+        android:backgroundTint="@android:color/darker_gray"
         tools:layout_editor_absoluteX="8dp"
         tools:layout_editor_absoluteY="85dp">
 
@@ -50,10 +51,10 @@
         android:id="@+id/login"
         android:layout_width="333dp"
         android:layout_height="51dp"
-        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="195dp"
-        android:background="@android:color/holo_purple"
+        android:layout_marginBottom="163dp"
+        android:background="#bf2a95"
         android:text="log in"
         android:textColor="@android:color/white"
         tools:layout_editor_absoluteX="135dp"
@@ -68,7 +69,26 @@
         android:layout_marginBottom="53dp"
         android:clickable="true"
         android:text="New to Cheystagram? Create an account."
-        android:textColor="@android:color/white"
+        android:textColor="@android:color/holo_blue_dark"
         android:textStyle="bold|italic" />
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar2"
+        android:layout_width="match_parent"
+        android:layout_height="201dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/iggradient"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="285dp"
+        android:layout_height="75dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="65dp"
+        app:srcCompat="@drawable/cheystagram" />
 
 </RelativeLayout>

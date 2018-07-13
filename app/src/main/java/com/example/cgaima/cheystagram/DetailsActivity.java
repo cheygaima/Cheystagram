@@ -21,6 +21,7 @@ public class DetailsActivity extends AppCompatActivity {
     Post detailsPost;
     TextView username;
     TextView caption;
+    TextView timestamp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,11 +32,14 @@ public class DetailsActivity extends AppCompatActivity {
         parsePic = findViewById(R.id.parsePic);
         username = findViewById(R.id.username);
         caption = findViewById(R.id.caption);
+        //timestamp = findViewById(R.id.timestamp);
+
 
         detailsPost = (Post) Parcels.unwrap(getIntent().getParcelableExtra("post"));
 
         username.setText(detailsPost.getUser().getUsername());
         caption.setText(detailsPost.getDescription());
+        //timestamp.setText(detailsPost.getTimestamp().toString());
 
         Glide.with(DetailsActivity.this).load(detailsPost.getImage().getUrl()).into(parsePic);
 

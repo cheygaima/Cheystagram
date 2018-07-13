@@ -50,8 +50,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         //populate the views according to this data
         viewHolder.username.setText(post.getUser().getUsername());
         viewHolder.caption.setText(post.getDescription());
-        //viewHolder.parsePic.setParseFile(post.getMedia());
-        //viewHolder.parsePic.loadInBackground();
+        viewHolder.timestamp.setText(post.getCreatedAt().toString());
 
         Glide.with(context).load(post.getImage().getUrl()).into(viewHolder.parsePic);
 
@@ -69,6 +68,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         public TextView username;
         public TextView caption;
         public ParseImageView parsePic;
+        public TextView timestamp;
 
         public ViewHolder(@NonNull final View itemView) {
             super(itemView);
@@ -77,6 +77,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             username = (TextView) itemView.findViewById(R.id.username);
             caption = (TextView) itemView.findViewById(R.id.caption);
             parsePic = (ParseImageView) itemView.findViewById(R.id.parsePic);
+            timestamp = (TextView) itemView.findViewById(R.id.timestamp);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -98,9 +99,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         notifyDataSetChanged();
     }
 
-    public void addAll(List<Post> list) {
-        mPosts.addAll(list);
-        notifyDataSetChanged();
-    }
-
 }
+
+
+
